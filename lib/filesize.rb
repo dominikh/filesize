@@ -103,7 +103,7 @@ class Filesize
       }
 
       prefix = $2 || ''
-      size   = ($1 || "0").gsub(", ", "").to_i
+      size   = ($1 || "0").gsub(", ", "").to_f
 
       return { :prefix => prefix, :size => size, :type => type}
     end
