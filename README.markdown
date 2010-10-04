@@ -5,7 +5,7 @@ That means:
 * Parsing strings (e.g. "1 GiB") and saving it internally as bytes
 * Handling both SI and binary prefixes
 * Converting from any type and unit to any other (SI to SI, SI to Binary and so on)
-* doing calculatings with filesizes (in a smart way, see Usage for more)
+* doing calculations with filesizes (in a smart way, see Usage for more)
 * filesize.rb also provides some default sizes, like the ones of DVDs
 
 ## Usage
