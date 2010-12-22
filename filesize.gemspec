@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.email = "dominikh@fork-bomb.org"
   s.extra_rdoc_files = ["README.markdown", "CHANGELOG", "lib/filesize.rb"]
-  s.files = ["README.markdown", "CHANGELOG", "lib/filesize.rb", "Manifest", "filesize.gemspec"]
+  s.files = ["README.markdown", "CHANGELOG", "lib/filesize.rb", "filesize.gemspec"]
   s.homepage = "http://filesize.rubyforge.org/"
   s.required_ruby_version = ">= 1.8.6"
   s.rubyforge_project = "filesize"
