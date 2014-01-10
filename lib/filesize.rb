@@ -89,6 +89,11 @@ class Filesize
     end
   end
 
+  # @return [Boolean]
+  def ==(other)
+    other.is_a?(self.class) && other.to_i == self.to_i
+  end
+
   # @return [Array<self, other>]
   # @api private
   def coerce(other)
