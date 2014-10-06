@@ -3,11 +3,13 @@ class Filesize
   SI     = {:regexp => /^([\d,.]+)?\s?([kmgtpezy]?)b$/i, :multiplier => 1000, :presuffix => ''}
   # Set of rules describing file sizes according to binary units.
   BINARY = {:regexp => /^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier => 1024, :presuffix => 'i'}
+  # Set of rules describing bit
+  BIT = {:regexp => /^([\d,.]+)?\s?([kmgtpezy]?)bit$/i, :multiplier => 1000, :presuffix => ''}
   # Unit prefixes used for file sizes.
   PREFIXES  = %w{k M G T P E Z Y}
 
   # @param [Number] size A file size, in bytes.
-  # @param [SI, BINARY] type Which type to use for conversions.
+  # @param [SI, BINARY, BIT] type Which type to use for conversions.
   def initialize(size, type = BINARY)
     @bytes = size.to_i
     @type  = type
@@ -33,7 +35,9 @@ class Filesize
     size    = @bytes
 
     pos = (PREFIXES.map{|s|s.downcase}.index(prefix.downcase) || -1) + 1
-
+    if to_type==BIT
+      size *= 8
+    end
     size = size/(to_type[:multiplier].to_f**(pos)) unless pos < 1
   end
   alias_method :to_f, :to
@@ -125,7 +129,7 @@ class Filesize
     def parse(string)
       type = nil
       # in this order, so we prefer binary :)
-      [BINARY, SI].each { |_type|
+      [BINARY, SI, BIT].each { |_type|
         if string =~ _type[:regexp]
           type    =  _type
           break
@@ -134,7 +138,9 @@ class Filesize
 
       prefix = $2 || ''
       size   = ($1 || 0).to_f
-
+      if type == BIT
+        size /= 8
+      end
       return { :prefix => prefix, :size => size, :type => type}
     end
   end
