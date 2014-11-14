@@ -4,7 +4,7 @@ class Filesize
   # Set of rules describing file sizes according to binary units.
   BINARY = {:regexp => /^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier => 1024, :presuffix => 'i'}
   # Unit prefixes used for file sizes.
-  PREFIXES  = %w{k M G T P E Z Y}
+  PREFIXES  = %w{K M G T P E Z Y}
 
   # @param [Number] size A file size, in bytes.
   # @param [SI, BINARY] type Which type to use for conversions.
