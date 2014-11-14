@@ -1,10 +1,28 @@
 class Filesize
+  TYPE_PREFIXES = {
+    # Unit prefixes used for SI file sizes.
+    SI: %w{k M G T P E Z Y},
+    # Unit prefixes used for binary file sizes.
+    BINARY: %w{Ki Mi Gi Ti Pi Ei Zi Yi}
+  }
+
+  # @deprecated Please use TYPE_PREFIXES[:SI] instead
+  PREFIXES = TYPE_PREFIXES[:SI]
+
   # Set of rules describing file sizes according to SI units.
-  SI     = {:regexp => /^([\d,.]+)?\s?([kmgtpezy]?)b$/i, :multiplier => 1000, :presuffix => ''}
+  SI = {
+    :regexp => /^([\d,.]+)?\s?([kmgtpezy]?)b$/i,
+    :multiplier => 1000,
+    :prefixes => TYPE_PREFIXES[:SI],
+    :presuffix => '' # deprecated
+  }
   # Set of rules describing file sizes according to binary units.
-  BINARY = {:regexp => /^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier => 1024, :presuffix => 'i'}
-  # Unit prefixes used for file sizes.
-  PREFIXES  = %w{k M G T P E Z Y}
+  BINARY = {
+    :regexp => /^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i,
+    :multiplier => 1024,
+    :prefixes => TYPE_PREFIXES[:BINARY],
+    :presuffix => 'i' # deprecated
+  }
 
   # @param [Number] size A file size, in bytes.
   # @param [SI, BINARY] type Which type to use for conversions.
@@ -32,7 +50,7 @@ class Filesize
     to_type = to_parts[:type]
     size    = @bytes
 
-    pos = (PREFIXES.map{|s|s.downcase}.index(prefix.downcase) || -1) + 1
+    pos = (@type[:prefixes].map { |s| s[0].downcase }.index(prefix.downcase) || -1) + 1
 
     size = size/(to_type[:multiplier].to_f**(pos)) unless pos < 1
   end
@@ -56,9 +74,9 @@ class Filesize
       unit = "B"
     else
       pos = (Math.log(size) / Math.log(@type[:multiplier])).floor
-      pos = PREFIXES.size-1 if pos > PREFIXES.size - 1
+      pos = @type[:prefixes].size-1 if pos > @type[:prefixes].size - 1
 
-      unit = PREFIXES[pos-1].to_s + @type[:presuffix] + "B"
+      unit = @type[:prefixes][pos-1] + "B"
     end
 
     to_s(unit)
@@ -115,7 +133,7 @@ class Filesize
 
       raise ArgumentError, "Unparseable filesize" unless type
 
-      offset = (PREFIXES.map{|s|s.downcase}.index(prefix.downcase) || -1) + 1
+      offset = (type[:prefixes].map { |s| s[0].downcase }.index(prefix.downcase) || -1) + 1
 
       new(size * (type[:multiplier] ** (offset)), type)
     end
