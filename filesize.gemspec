@@ -14,4 +14,6 @@ Gem::Specification.new do |s|
   s.homepage = "http://filesize.rubyforge.org/"
   s.required_ruby_version = ">= 1.8.6"
   s.rubyforge_project = "filesize"
+
+  s.add_development_dependency "rspec", "~> 3.0"
 end
