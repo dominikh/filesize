@@ -10,28 +10,43 @@ That means:
 
 ## Usage
 ### Parsing a string
-    Filesize.from("1 GiB") # => #<Filesize:0x93c06c8 @bytes=1073741824, @type={:regexp=>/^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier=>1024, :presuffix=>"i"}>
+```ruby
+Filesize.from("1 GiB")
+# => #<Filesize:0x93c06c8 @bytes=1073741824, @type={:regexp=>/^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier=>1024, :presuffix=>"i"}>
+```
 
 ### Converting filesizes
-    Filesize.from("1 GiB").to_f('KiB') # => 1048576.0
-    Filesize.from("1 GiB").to_f('KB')  # => 1073741.824
-    Filesize.from("1 GB").to_i         # => 1000000000
+```ruby
+Filesize.from("1 GiB").to_f('KiB') # => 1048576.0
+Filesize.from("1 GiB").to_f('KB')  # => 1073741.824
+Filesize.from("1 GB").to_i         # => 1000000000
+```
 
 ### Outputting filesizes
-    Filesize.from("12502343 B").to_s('GiB') # => "0.01 GiB"
-    Filesize.from("12502343 B").pretty      # => "11.92 MiB"
+```ruby
+Filesize.from("12502343 B").to_s('GiB') # => "0.01 GiB"
+Filesize.from("12502343 B").pretty      # => "11.92 MiB"
+```
 
 ### Calculating with filesizes
 #### The file size on the left side sets the type
-    (Filesize.from("1400 MB")  + Filesize.from("1400 MiB")).pretty # => "2.87 GB"
-    (Filesize.from("1400 MiB") + Filesize.from("1400 MB")).pretty  # => "2.67 GiB"
+```ruby
+(Filesize.from("1400 MB")  + Filesize.from("1400 MiB")).pretty # => "2.87 GB"
+(Filesize.from("1400 MiB") + Filesize.from("1400 MB")).pretty  # => "2.67 GiB"
+```
 
 #### Filesizes can also be coerced
-    (Filesize.from("1400 MiB") + 1024).pretty # => "1.37 GiB"
-    (1024 + Filesize.from("1400 MB")).pretty  # => "1.40 GB"
+```ruby
+(Filesize.from("1400 MiB") + 1024).pretty # => "1.37 GiB"
+(1024 + Filesize.from("1400 MB")).pretty  # => "1.40 GB"
+```
 
 #### filesize.rb is smart about the return value
-    Filesize.from("1400 MiB") / Filesize.from("700 MiB") # => 2.0
+```ruby
+Filesize.from("1400 MiB") / Filesize.from("700 MiB") # => 2.0
+```
 
 #### One can also use predefined sizes
-    Filesize::DVD / Filesize::CD # => 6.13566756571429
+```ruby
+Filesize::DVD / Filesize::CD # => 6.13566756571429
+```
