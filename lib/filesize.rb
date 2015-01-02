@@ -139,22 +139,13 @@ class Filesize
     end
   end
 
-  # The size of a floppy disk
-  Floppy = Filesize.from("1474 KiB")
-  # The size of a CD
-  CD     = Filesize.from("700 MB")
-  # The size of a common DVD
-  DVD_5  = Filesize.from("4.38 GiB")
-  # The same as a DVD 5
-  DVD    = DVD_5
-  # The size of a single-sided dual-layer DVD
-  DVD_9  = Filesize.from("7.92 GiB")
-  # The size of a double-sided single-layer DVD
-  DVD_10 = DVD_5 * 2
-  # The size of a double-sided DVD, combining a DVD-9 and a DVD-5
-  DVD_14 = DVD_9 + DVD_5
-  # The size of a double-sided dual-layer DVD
-  DVD_18 = DVD_14 * 2
-  # The size of a Zip disk
-  ZIP    = Filesize.from("100 MB")
+  Floppy = Filesize.from("1474 KiB") # The size of a floppy disk
+  CD     = Filesize.from("700 MB")   # The size of a CD
+  DVD_5  = Filesize.from("4.38 GiB") # The size of a common DVD
+  DVD    = DVD_5                     # The same as a DVD 5
+  DVD_9  = Filesize.from("7.92 GiB") # The size of a single-sided dual-layer DVD
+  DVD_10 = DVD_5 * 2                 # The size of a double-sided single-layer DVD
+  DVD_14 = DVD_9 + DVD_5             # The size of a double-sided DVD, combining a DVD-9 and a DVD-5
+  DVD_18 = DVD_14 * 2                # The size of a double-sided dual-layer DVD
+  ZIP    = Filesize.from("100 MB")   # The size of a Zip disk
 end
