@@ -3,6 +3,7 @@ require 'filesize'
 require 'bigdecimal'
 
 describe Filesize do
+
   describe '::PREFIXES' do
     it 'are the SI prefixes' do
       expect(Filesize::PREFIXES).to eq Filesize::TYPE_PREFIXES[:SI]
@@ -98,6 +99,120 @@ describe Filesize do
   describe '::Floppy' do
     it 'has the right size in bytes' do
       expect(Filesize::Floppy.to_i).to eq 1_509_376
+    end
+  end
+
+  describe '#==' do
+    context 'when comparing the same file sizes' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') == Filesize.from('100 B')).to eq true
+      end
+    end
+
+    context 'when comparing two different file sizes' do
+      it 'should return false' do
+        expect(Filesize.from('100 B') == Filesize.from('99 B')).to eq false
+      end
+    end
+  end
+
+  describe '#!=' do
+    context 'when comparing two different file sizes' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') != Filesize.from('99 B')).to eq true
+      end
+
+      context 'when comparing the same file sizes' do
+        it 'should return false' do
+          expect(Filesize.from('100 B') != Filesize.from('100 B')).to eq false
+        end
+      end
+    end
+  end
+
+  describe '#>' do
+    context 'when comparing two file sizes and the first is greater than the second' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') > Filesize.from('99 B')).to eq true
+      end
+    end
+
+    context 'when comparing the same file sizes' do
+      it 'should return false' do
+        expect(Filesize.from('100 B') > Filesize.from('100 B')).to eq false
+      end
+    end
+
+    context 'when comparing two file sizes and the first is smaller than the second' do
+      it 'should return false' do
+        expect(Filesize.from('99 B') > Filesize.from('100 B')).to eq false
+      end
+    end
+  end
+
+  describe '#<' do
+    context 'when comparing two file sizes and the second is greater than the first' do
+      it 'should return true' do
+        expect(Filesize.from('99 B') < Filesize.from('100 B')).to eq true
+      end
+    end
+
+    context 'when comparing the same file sizes' do
+      it 'should return false' do
+        expect(Filesize.from('100 B') < Filesize.from('100 B')).to eq false
+      end
+    end
+
+    context 'when comparing two file sizes and the second is smaller than the first' do
+      it 'should return false' do
+        expect(Filesize.from('100 B') < Filesize.from('99 B')).to eq false
+      end
+    end
+  end
+
+  describe '#<=' do
+    context 'when comparing two file sizes and the second is greater than the first' do
+      it 'should return true' do
+        expect(Filesize.from('99 B') <= Filesize.from('100 B')).to eq true
+      end
+    end
+
+    context 'when comparing the same file sizes' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') <= Filesize.from('100 B')).to eq true
+      end
+    end
+
+    context 'when comparing two file sizes and the first equals the second' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') <= Filesize.from('100 B')).to eq true
+      end
+    end
+
+    context 'when comparing two file sizes and the second is smaller than the first' do
+      it 'should return false' do
+        expect(Filesize.from('100 B') <= Filesize.from('99 B')).to eq false
+      end
+    end
+  end
+
+  describe '#>=' do
+    context 'when comparing two file sizes and the first is greater than the second' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') >= Filesize.from('99 B')).to eq true
+      end
+    end
+
+    context 'when comparing the same file sizes' do
+      it 'should return true' do
+        expect(Filesize.from('100 B') >= Filesize.from('100 B')).to eq true
+      end
+    end
+
+    context 'when comparing two file sizes and the first is smaller than the second' do
+      it 'should return false' do
+        expect(Filesize.from('99 B') >= Filesize.from('100 B')).to eq false
+      end
     end
   end
 

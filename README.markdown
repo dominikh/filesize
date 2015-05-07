@@ -22,6 +22,17 @@ Filesize.from("1 GiB").to_f('KB')  # => 1073741.824
 Filesize.from("1 GB").to_i         # => 1000000000
 ```
 
+### Comparing filesizes
+Supported operators: `>`, `<`, `>=`, `<=`, `==`, `!=`.
+
+```ruby
+Filesize.from("2 MB") > Filesize.from("1 MB") # => true
+Filesize.from("2 MB") < Filesize.from("1 MB") # => false
+Filesize.from("2 MB") >= Filesize.from("1 MB") # => true
+Filesize.from("2 MB") != Filesize.from("1 MB") # => true
+Filesize.from("2 MB") == Filesize.from("1 MB") # => false
+```
+
 ### Outputting filesizes
 ```ruby
 Filesize.from("12502343 B").to_s('GiB') # => "0.01 GiB"

@@ -107,9 +107,30 @@ class Filesize
     end
   end
 
+  # Compares two instances of a Filesize object
   # @return [Boolean]
   def ==(other)
     other.is_a?(self.class) && other.to_i == self.to_i
+  end
+
+  def !=(other)
+    other.is_a?(self.class) && other.to_i != self.to_i
+  end
+
+  def >(other)
+    other.is_a?(self.class) && self.to_i > other.to_i
+  end
+
+  def <(other)
+    other.is_a?(self.class) && self.to_i < other.to_i
+  end
+
+  def >=(other)
+    other.is_a?(self.class) && self.to_i >= other.to_i
+  end
+
+  def <=(other)
+    other.is_a?(self.class) && self.to_i <= other.to_i
   end
 
   # @return [Array<self, other>]
