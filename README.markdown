@@ -28,6 +28,11 @@ Filesize.from("12502343 B").to_s('GiB') # => "0.01 GiB"
 Filesize.from("12502343 B").pretty      # => "11.92 MiB"
 ```
 
+### Comparing filesizes
+```ruby
+Filesize.from("1 KB") <=> Filesize.from("1 MB") # => -1
+```
+
 ### Calculating with filesizes
 #### The file size on the left side sets the type
 ```ruby

@@ -1,4 +1,6 @@
 class Filesize
+  include Comparable
+
   TYPE_PREFIXES = {
     # Unit prefixes used for SI file sizes.
     SI: %w{k M G T P E Z Y},
@@ -107,9 +109,8 @@ class Filesize
     end
   end
 
-  # @return [Boolean]
-  def ==(other)
-    other.is_a?(self.class) && other.to_i == self.to_i
+  def <=>(other)
+    self.to_i <=> other.to_i
   end
 
   # @return [Array<self, other>]

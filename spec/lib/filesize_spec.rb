@@ -71,6 +71,17 @@ describe Filesize do
     end
   end
 
+  describe "#<=>" do
+    it 'compares correctly' do
+      [["1024 B", "1025 B", -1],
+       ["1025 B", "1024 B", 1],
+       ["1024 B", "1024 B", 0],
+       ["1024 B", "1 KiB", 0]].each do |left, right, expected|
+        expect(Filesize.from(left) <=> Filesize.from(right)).to eq expected
+      end
+    end
+  end
+
   describe '#to_s' do
     it 'returns the number of bytes (default) with its unit' do
       expect(Filesize.new(555).to_s).to eq '555.00 B'
