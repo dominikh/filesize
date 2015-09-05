@@ -11,9 +11,8 @@ Gem::Specification.new do |s|
   s.email = "dominikh@fork-bomb.org"
   s.extra_rdoc_files = ["README.markdown", "lib/filesize.rb"]
   s.files = ["README.markdown", "lib/filesize.rb", "filesize.gemspec"]
-  s.homepage = "http://filesize.rubyforge.org/"
+  s.homepage = "https://github.com/dominikh/filesize"
   s.required_ruby_version = ">= 1.8.6"
-  s.rubyforge_project = "filesize"
 
   s.add_development_dependency "rspec", "~> 3.0"
 end
