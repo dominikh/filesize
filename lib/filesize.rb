@@ -3,9 +3,9 @@ class Filesize
 
   TYPE_PREFIXES = {
     # Unit prefixes used for SI file sizes.
-    SI: %w{k M G T P E Z Y},
+    :SI => %w{k M G T P E Z Y},
     # Unit prefixes used for binary file sizes.
-    BINARY: %w{Ki Mi Gi Ti Pi Ei Zi Yi}
+    :BINARY => %w{Ki Mi Gi Ti Pi Ei Zi Yi}
   }
 
   # @deprecated Please use TYPE_PREFIXES[:SI] instead
@@ -52,7 +52,7 @@ class Filesize
     to_type = to_parts[:type]
     size    = @bytes
 
-    pos = (@type[:prefixes].map { |s| s[0].downcase }.index(prefix.downcase) || -1) + 1
+    pos = (@type[:prefixes].map { |s| s[0].chr.downcase }.index(prefix.downcase) || -1) + 1
 
     size = size/(to_type[:multiplier].to_f**(pos)) unless pos < 1
   end
@@ -134,7 +134,7 @@ class Filesize
 
       raise ArgumentError, "Unparseable filesize" unless type
 
-      offset = (type[:prefixes].map { |s| s[0].downcase }.index(prefix.downcase) || -1) + 1
+      offset = (type[:prefixes].map { |s| s[0].chr.downcase }.index(prefix.downcase) || -1) + 1
 
       new(size * (type[:multiplier] ** (offset)), type)
     end
