@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.email = "dominikh@fork-bomb.org"
   s.has_rdoc = "yard"
-  s.files = ["README.markdown", "lib/filesize.rb", "filesize.gemspec"]
+  s.files = Dir.glob("{lib,spec}/**/*.rb") + ["LICENSE", "README.md"]
   s.homepage = "https://github.com/dominikh/filesize"
   s.required_ruby_version = ">= 1.8.6"
 
