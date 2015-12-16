@@ -23,24 +23,24 @@ describe Filesize do
     end
   end
 
-  describe '.from' do
+  describe '.parse' do
     context 'SI units' do
       it 'parses kilobytes' do
-        expect(Filesize.from('1 kB').to_f).to eq 1000
+        expect(Filesize.parse('1 kB').to_f).to eq 1000
       end
 
       it 'parses megabytes' do
-        expect(Filesize.from('1 MB').to_f).to eq 1000 * 1000
+        expect(Filesize.parse('1 MB').to_f).to eq 1000 * 1000
       end
     end
 
     context 'BINARY units' do
       it 'parses kilobytes' do
-        expect(Filesize.from('1 KiB').to_f).to eq 1024
+        expect(Filesize.parse('1 KiB').to_f).to eq 1024
       end
 
       it 'parses megabytes' do
-        expect(Filesize.from('1 MiB').to_f).to eq 1024 * 1024
+        expect(Filesize.parse('1 MiB').to_f).to eq 1024 * 1024
       end
     end
   end
@@ -71,7 +71,7 @@ describe Filesize do
        ["1025 B", "1024 B", 1],
        ["1024 B", "1024 B", 0],
        ["1024 B", "1 KiB", 0]].each do |left, right, expected|
-        expect(Filesize.from(left) <=> Filesize.from(right)).to eq expected
+        expect(Filesize.parse(left) <=> Filesize.parse(right)).to eq expected
       end
     end
   end

@@ -111,7 +111,7 @@ class Filesize
     # @param [String] arg A file size to parse.
     # @raise [ArgumentError] Raised if the file size cannot be parsed properly.
     # @return [Filesize]
-    def from(arg)
+    def parse(arg)
       parts  = parse_unit(arg)
       prefix = parts[:prefix]
       size   = parts[:size]
@@ -144,15 +144,15 @@ class Filesize
   end
 
   # The size of a floppy disk
-  Floppy = Filesize.from("1474 KiB")
+  Floppy = Filesize.parse("1474 KiB")
   # The size of a CD
-  CD     = Filesize.from("700 MB")
+  CD     = Filesize.parse("700 MB")
   # The size of a common DVD
-  DVD_5  = Filesize.from("4.38 GiB")
+  DVD_5  = Filesize.parse("4.38 GiB")
   # The same as a DVD 5
   DVD    = DVD_5
   # The size of a single-sided dual-layer DVD
-  DVD_9  = Filesize.from("7.92 GiB")
+  DVD_9  = Filesize.parse("7.92 GiB")
   # The size of a double-sided single-layer DVD
   DVD_10 = DVD_5 * 2
   # The size of a double-sided DVD, combining a DVD-9 and a DVD-5
@@ -160,5 +160,5 @@ class Filesize
   # The size of a double-sided dual-layer DVD
   DVD_18 = DVD_14 * 2
   # The size of a Zip disk
-  ZIP    = Filesize.from("100 MB")
+  ZIP    = Filesize.parse("100 MB")
 end
