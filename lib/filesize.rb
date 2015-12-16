@@ -39,7 +39,7 @@ class Filesize
 
   # @param [String] unit Which unit to convert to.
   # @return [Float] Returns the size in a given unit.
-  def to(unit = 'B')
+  def to_f(unit = 'B')
     to_parts = self.class.parse(unit)
     prefix   = to_parts[:prefix]
 
@@ -54,13 +54,12 @@ class Filesize
 
     size = size/(to_type[:multiplier].to_f**(pos)) unless pos < 1
   end
-  alias_method :to_f, :to
 
   # @param (see #to_f)
   # @return [String] Same as {#to_f}, but as a string, with the unit appended.
   # @see #to_f
   def to_s(unit = 'B')
-    "%.2f %s" % [to(unit).to_f.to_s, unit]
+    "%.2f %s" % [to_f(unit).to_f.to_s, unit]
   end
 
   # Same as {#to_s} but with an automatic determination of the most

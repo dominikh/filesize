@@ -32,21 +32,21 @@ describe Filesize do
   describe '.from' do
     context 'SI units' do
       it 'parses kilobytes' do
-        expect(Filesize.from('1 kB').to).to eq 1000
+        expect(Filesize.from('1 kB').to_f).to eq 1000
       end
 
       it 'parses megabytes' do
-        expect(Filesize.from('1 MB').to).to eq 1000 * 1000
+        expect(Filesize.from('1 MB').to_f).to eq 1000 * 1000
       end
     end
 
     context 'BINARY units' do
       it 'parses kilobytes' do
-        expect(Filesize.from('1 KiB').to).to eq 1024
+        expect(Filesize.from('1 KiB').to_f).to eq 1024
       end
 
       it 'parses megabytes' do
-        expect(Filesize.from('1 MiB').to).to eq 1024 * 1024
+        expect(Filesize.from('1 MiB').to_f).to eq 1024 * 1024
       end
     end
   end
@@ -57,17 +57,17 @@ describe Filesize do
     end
   end
 
-  describe '#to' do
+  describe '#to_f' do
     it 'returns the number of bytes (default)' do
-      expect(Filesize.new(555).to).to eq 555
+      expect(Filesize.new(555).to_f).to eq 555
     end
 
     it 'returns the number for the specified unit (BINARY)' do
-      expect(Filesize.new(1024).to('KiB')).to eq 1.00
+      expect(Filesize.new(1024).to_f('KiB')).to eq 1.00
     end
 
     it 'returns the number for the specified unit (SI)' do
-      expect(Filesize.new(1000).to('kB')).to eq 1.00
+      expect(Filesize.new(1000).to_f('kB')).to eq 1.00
     end
   end
 
