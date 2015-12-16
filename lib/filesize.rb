@@ -37,7 +37,7 @@ class Filesize
   # @param [String] unit Which unit to convert to.
   # @return [Float] Returns the size in a given unit.
   def to_f(unit = 'B')
-    to_parts = self.class.parse(unit)
+    to_parts = self.class.parse_unit(unit)
     prefix   = to_parts[:prefix]
 
     if prefix == 'B' or prefix.empty?
@@ -112,7 +112,7 @@ class Filesize
     # @raise [ArgumentError] Raised if the file size cannot be parsed properly.
     # @return [Filesize]
     def from(arg)
-      parts  = parse(arg)
+      parts  = parse_unit(arg)
       prefix = parts[:prefix]
       size   = parts[:size]
       type   = parts[:type]
@@ -126,7 +126,7 @@ class Filesize
 
     # @return [Hash<:prefix, :size, :type>]
     # @api private
-    def parse(string)
+    def parse_unit(string)
       type = nil
       # in this order, so we prefer binary :)
       [BINARY, SI].each { |_type|
