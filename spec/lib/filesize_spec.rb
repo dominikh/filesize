@@ -76,13 +76,23 @@ describe Filesize do
     end
   end
 
-  describe '#to_s' do
+  describe '#best_unit' do
     it 'returns the number of the most matching prefix with its unit (BINARY default)' do
-      expect(Filesize.new(1024).to_s).to eq '1.00 KiB'
+      expect(Filesize.new(1024).best_unit).to eq [1.00, "KiB"]
     end
 
     it 'returns the number of the most matching prefix with its unit (SI)' do
-      expect(Filesize.new(1000, Filesize::SI).to_s).to eq '1.00 kB'
+      expect(Filesize.new(1000, Filesize::SI).best_unit).to eq [1.00, "kB"]
+    end
+  end
+
+  describe '#to_s' do
+    it 'returns the number of the most matching prefix with its unit (BINARY default)' do
+      expect(Filesize.new(1024).to_s).to eq "1.00 KiB"
+    end
+
+    it 'returns the number of the most matching prefix with its unit (SI)' do
+      expect(Filesize.new(1000, Filesize::SI).to_s).to eq "1.00 kB"
     end
   end
 

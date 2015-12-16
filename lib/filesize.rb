@@ -56,6 +56,14 @@ class Filesize
   #
   # @return [String]
   def to_s
+    "%.2f %s" % best_unit
+  end
+
+  # Returns a tuple consisting of the file size, represented as a #
+  # float, and the matching unit.
+  #
+  # @return [<Float, String>]
+  def best_unit
     if @bytes < @type[:multiplier]
       unit = "B"
     else
@@ -65,7 +73,7 @@ class Filesize
       unit = @type[:prefixes][pos-1] + "B"
     end
 
-    "%.2f %s" % [to_f(unit).to_f.to_s, unit]
+    [to_f(unit).to_f, unit]
   end
 
   # @return [Filesize]
