@@ -3,12 +3,6 @@ require 'filesize'
 require 'bigdecimal'
 
 describe Filesize do
-  describe '::PREFIXES' do
-    it 'are the SI prefixes' do
-      expect(Filesize::PREFIXES).to eq Filesize::TYPE_PREFIXES[:SI]
-    end
-  end
-
   describe '::SI' do
     it 'has the right multiplier' do
       expect(Filesize::SI[:multiplier]).to eq 1000

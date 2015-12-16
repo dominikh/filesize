@@ -8,9 +8,6 @@ class Filesize
     :BINARY => %w{Ki Mi Gi Ti Pi Ei Zi Yi}
   }
 
-  # @deprecated Please use TYPE_PREFIXES[:SI] instead
-  PREFIXES = TYPE_PREFIXES[:SI]
-
   # Set of rules describing file sizes according to SI units.
   SI = {
     :regexp => /^([\d,.]+)?\s?([kmgtpezy]?)b$/i,
