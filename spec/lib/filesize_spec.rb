@@ -83,26 +83,12 @@ describe Filesize do
   end
 
   describe '#to_s' do
-    it 'returns the number of bytes (default) with its unit' do
-      expect(Filesize.new(555).to_s).to eq '555.00 B'
-    end
-
-    it 'returns the number of for the specified unit with its unit (BINARY)' do
-      expect(Filesize.new(1024).to_s('KiB')).to eq '1.00 KiB'
-    end
-
-    it 'returns the number of for the specified unit with its unit (SI)' do
-      expect(Filesize.new(1000).to_s('kB')).to eq '1.00 kB'
-    end
-  end
-
-  describe '#pretty' do
     it 'returns the number of the most matching prefix with its unit (BINARY default)' do
-      expect(Filesize.new(1024).pretty).to eq '1.00 KiB'
+      expect(Filesize.new(1024).to_s).to eq '1.00 KiB'
     end
 
     it 'returns the number of the most matching prefix with its unit (SI)' do
-      expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+      expect(Filesize.new(1000, Filesize::SI).to_s).to eq '1.00 kB'
     end
   end
 

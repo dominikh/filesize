@@ -55,19 +55,10 @@ class Filesize
     size = size/(to_type[:multiplier].to_f**(pos)) unless pos < 1
   end
 
-  # @param (see #to_f)
-  # @return [String] Same as {#to_f}, but as a string, with the unit appended.
-  # @see #to_f
-  def to_s(unit = 'B')
-    "%.2f %s" % [to_f(unit).to_f.to_s, unit]
-  end
-
-  # Same as {#to_s} but with an automatic determination of the most
-  # sensible unit.
+  # Formats the file size in the best matching unit.
   #
   # @return [String]
-  # @see #to_s
-  def pretty
+  def to_s
     size = @bytes
     if size < @type[:multiplier]
       unit = "B"
@@ -78,7 +69,7 @@ class Filesize
       unit = @type[:prefixes][pos-1] + "B"
     end
 
-    to_s(unit)
+    "%.2f %s" % [to_f(unit).to_f.to_s, unit]
   end
 
   # @return [Filesize]
