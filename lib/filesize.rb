@@ -49,18 +49,17 @@ class Filesize
 
     pos = (@type[:prefixes].map { |s| s[0].chr.downcase }.index(prefix.downcase) || -1) + 1
 
-    size = size/(to_type[:multiplier].to_f**(pos)) unless pos < 1
+    size = size/(to_type[:multiplier].to_f ** pos) unless pos < 1
   end
 
   # Formats the file size in the best matching unit.
   #
   # @return [String]
   def to_s
-    size = @bytes
-    if size < @type[:multiplier]
+    if @bytes < @type[:multiplier]
       unit = "B"
     else
-      pos = (Math.log(size) / Math.log(@type[:multiplier])).floor
+      pos = (Math.log(@bytes) / Math.log(@type[:multiplier])).floor
       pos = @type[:prefixes].size-1 if pos > @type[:prefixes].size - 1
 
       unit = @type[:prefixes][pos-1] + "B"
@@ -118,10 +117,8 @@ class Filesize
       type   = parts[:type]
 
       raise ArgumentError, "Unparseable filesize" unless type
-
       offset = (type[:prefixes].map { |s| s[0].chr.downcase }.index(prefix.downcase) || -1) + 1
-
-      new(size * (type[:multiplier] ** (offset)), type)
+      new(size * (type[:multiplier] ** offset), type)
     end
 
     # @return [Hash<:prefix, :size, :type>]
