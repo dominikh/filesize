@@ -16,14 +16,12 @@ class Filesize
     :regexp => /^([\d,.]+)?\s?([kmgtpezy]?)b$/i,
     :multiplier => 1000,
     :prefixes => TYPE_PREFIXES[:SI],
-    :presuffix => '' # deprecated
   }
   # Set of rules describing file sizes according to binary units.
   BINARY = {
     :regexp => /^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i,
     :multiplier => 1024,
     :prefixes => TYPE_PREFIXES[:BINARY],
-    :presuffix => 'i' # deprecated
   }
 
   # @param [Number] size A file size, in bytes.
