@@ -11,44 +11,43 @@ That means:
 ## Usage
 ### Parsing a string
 ```ruby
-Filesize.from("1 GiB")
+Filesize.parse("1 GiB")
 # => #<Filesize:0x93c06c8 @bytes=1073741824, @type={:regexp=>/^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier=>1024, :presuffix=>"i"}>
 ```
 
 ### Converting filesizes
 ```ruby
-Filesize.from("1 GiB").to_f('KiB') # => 1048576.0
-Filesize.from("1 GiB").to_f('KB')  # => 1073741.824
-Filesize.from("1 GB").to_i         # => 1000000000
+Filesize.parse("1 GiB").to_f('KiB') # => 1048576.0
+Filesize.parse("1 GiB").to_f('KB')  # => 1073741.824
+Filesize.parse("1 GB").to_i         # => 1000000000
 ```
 
 ### Outputting filesizes
 ```ruby
-Filesize.from("12502343 B").to_s('GiB') # => "0.01 GiB"
-Filesize.from("12502343 B").pretty      # => "11.92 MiB"
+Filesize.parse("12502343 B").to_s   # => "11.92 MiB"
 ```
 
 ### Comparing filesizes
 ```ruby
-Filesize.from("1 KB") <=> Filesize.from("1 MB") # => -1
+Filesize.parse("1 KB") <=> Filesize.parse("1 MB") # => -1
 ```
 
 ### Calculating with filesizes
 #### The file size on the left side sets the type
 ```ruby
-(Filesize.from("1400 MB")  + Filesize.from("1400 MiB")).pretty # => "2.87 GB"
-(Filesize.from("1400 MiB") + Filesize.from("1400 MB")).pretty  # => "2.67 GiB"
+(Filesize.parse("1400 MB")  + Filesize.parse("1400 MiB")).to_s # => "2.87 GB"
+(Filesize.parse("1400 MiB") + Filesize.parse("1400 MB")).to_s  # => "2.67 GiB"
 ```
 
 #### Filesizes can also be coerced
 ```ruby
-(Filesize.from("1400 MiB") + 1024).pretty # => "1.37 GiB"
-(1024 + Filesize.from("1400 MB")).pretty  # => "1.40 GB"
+(Filesize.parse("1400 MiB") + 1024).to_s # => "1.37 GiB"
+(1024 + Filesize.parse("1400 MB")).to_s  # => "1.40 GB"
 ```
 
 #### filesize.rb is smart about the return value
 ```ruby
-Filesize.from("1400 MiB") / Filesize.from("700 MiB") # => 2.0
+Filesize.parse("1400 MiB") / Filesize.parse("700 MiB") # => 2.0
 ```
 
 #### One can also use predefined sizes
