@@ -132,7 +132,7 @@ class Filesize
       size   = parts[:size]
       type   = parts[:type]
 
-      raise ArgumentError, "Unparseable filesize" unless type
+      raise ArgumentError, "Unparseable filesize: #{arg}" unless type
 
       offset = (type[:prefixes].map { |s| s[0].chr.downcase }.index(prefix.downcase) || -1) + 1
 
