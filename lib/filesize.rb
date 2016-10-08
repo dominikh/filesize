@@ -13,14 +13,14 @@ class Filesize
 
   # Set of rules describing file sizes according to SI units.
   SI = {
-    :regexp => /^([\d,.]+)?\s?([kmgtpezy]?)b$/i,
+    :regexp => /^([\d,.]+)?[[:space:]]?([kmgtpezy]?)b$/i,
     :multiplier => 1000,
     :prefixes => TYPE_PREFIXES[:SI],
     :presuffix => '' # deprecated
   }
   # Set of rules describing file sizes according to binary units.
   BINARY = {
-    :regexp => /^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i,
+    :regexp => /^([\d,.]+)?[[:space:]]?(?:([kmgtpezy])i)?b$/i,
     :multiplier => 1024,
     :prefixes => TYPE_PREFIXES[:BINARY],
     :presuffix => 'i' # deprecated
