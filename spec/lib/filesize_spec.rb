@@ -36,7 +36,7 @@ describe Filesize do
       end
 
       it 'parses megabytes' do
-        expect(Filesize.from('1 MB').to).to eq 1000 * 1000
+        expect(Filesize.from(' 1  MB').to).to eq 1000 * 1000
       end
     end
 

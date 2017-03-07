@@ -13,14 +13,14 @@ class Filesize
 
   # Set of rules describing file sizes according to SI units.
   SI = {
-    :regexp => /^([\d,.]+)?[[:space:]]?([kmgtpezy]?)b$/i,
+    :regexp => /^([\d,.]+)?([kmgtpezy]?)b$/i,
     :multiplier => 1000,
     :prefixes => TYPE_PREFIXES[:SI],
     :presuffix => '' # deprecated
   }
   # Set of rules describing file sizes according to binary units.
   BINARY = {
-    :regexp => /^([\d,.]+)?[[:space:]]?(?:([kmgtpezy])i)?b$/i,
+    :regexp => /^([\d,.]+)?(?:([kmgtpezy])i)?b$/i,
     :multiplier => 1024,
     :prefixes => TYPE_PREFIXES[:BINARY],
     :presuffix => 'i' # deprecated
@@ -142,6 +142,7 @@ class Filesize
     # @return [Hash<:prefix, :size, :type>]
     # @api private
     def parse(string)
+      string.delete!(' ')
       type = nil
       # in this order, so we prefer binary :)
       [BINARY, SI].each { |_type|
