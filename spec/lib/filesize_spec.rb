@@ -38,6 +38,10 @@ describe Filesize do
       it 'parses megabytes' do
         expect(Filesize.from('1 MB').to).to eq 1000 * 1000
       end
+
+      it 'parses megabytes without b suffix' do
+        expect(Filesize.from('1 M').to).to eq 1000 * 1000
+      end
     end
 
     context 'BINARY units' do
@@ -47,6 +51,10 @@ describe Filesize do
 
       it 'parses megabytes' do
         expect(Filesize.from('1 MiB').to).to eq 1024 * 1024
+      end
+
+      it 'parses mebibytes without b suffix' do
+        expect(Filesize.from('1 Mi').to).to eq 1024 * 1024
       end
     end
   end
