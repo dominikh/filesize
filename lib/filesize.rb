@@ -26,6 +26,9 @@ class Filesize
     :presuffix => 'i' # deprecated
   }
 
+  # Set default precision
+  PRECISION = 2
+
   # @param [Number] size A file size, in bytes.
   # @param [SI, BINARY] type Which type to use for conversions.
   def initialize(size, type = BINARY)
@@ -61,8 +64,10 @@ class Filesize
   # @param (see #to_f)
   # @return [String] Same as {#to_f}, but as a string, with the unit appended.
   # @see #to_f
-  def to_s(unit = 'B')
-    "%.2f %s" % [to(unit).to_f.to_s, unit]
+  def to_s(unit = 'B', args = {})
+    precision ||= (args[:precision] || PRECISION)
+    
+    "%.#{precision}f %s" % [to(unit).to_f.to_s, unit]
   end
 
   # Same as {#to_s} but with an automatic determination of the most
@@ -70,7 +75,7 @@ class Filesize
   #
   # @return [String]
   # @see #to_s
-  def pretty
+  def pretty(args = {})
     size = @bytes
     if size < @type[:multiplier]
       unit = "B"
@@ -81,7 +86,7 @@ class Filesize
       unit = @type[:prefixes][pos-1] + "B"
     end
 
-    to_s(unit)
+    to_s(unit, args)
   end
 
   # @return [Filesize]
