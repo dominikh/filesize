@@ -102,6 +102,10 @@ describe Filesize do
     it 'returns the number of for the specified unit with its unit (SI)' do
       expect(Filesize.new(1000).to_s('kB')).to eq '1.00 kB'
     end
+
+    it 'returns the number with another precision' do
+      expect(Filesize.new(1360).to_s('kB', :precision => 1)).to eq '1.4 kB'
+    end
   end
 
   describe '#pretty' do
@@ -109,9 +113,16 @@ describe Filesize do
       expect(Filesize.new(1024).pretty).to eq '1.00 KiB'
     end
 
-    it 'returns the number of the most matching prefix with its unit (SI)' do
-      expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+    describe 'returns the number of the most matching prefix with its unit (SI)' do
+      it 'default precision Filesize::PRECISION' do 
+        expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+      end
+      
+      it 'zero decimals' do
+        expect(Filesize.new(1000, Filesize::SI).pretty(:precision => 0)).to eq '1 kB'
+      end
     end
+
   end
 
   describe '::Floppy' do
