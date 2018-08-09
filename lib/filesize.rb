@@ -65,7 +65,7 @@ class Filesize
   # @return [String] Same as {#to_f}, but as a string, with the unit appended.
   # @see #to_f
   def to_s(unit = 'B', args = {})
-    precision ||= (args[:precision] || PRECISION)
+    precision = args[:precision] || PRECISION
     
     "%.#{precision}f %s" % [to(unit).to_f.to_s, unit]
   end
