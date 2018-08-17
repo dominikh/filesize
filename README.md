@@ -12,7 +12,7 @@ That means:
 ### Parsing a string
 ```ruby
 Filesize.from("1 GiB")
-# => #<Filesize:0x93c06c8 @bytes=1073741824, @type={:regexp=>/^([\d,.]+)?\s?(?:([kmgtpezy])i)?b$/i, :multiplier=>1024, :presuffix=>"i"}>
+# => #<Filesize:0x00007fd71f103328 @bytes=1073741824, @type={:regexp=>/^(-?)([\d,.]+)?[[:space:]]?(?:([kmgtpezy])i)?b?$/i, :multiplier=>1024, :prefixes=>["Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi", "Yi"], :presuffix=>"i"}>
 ```
 
 ### Converting filesizes

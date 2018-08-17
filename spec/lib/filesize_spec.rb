@@ -42,6 +42,18 @@ describe Filesize do
       it 'parses megabytes without b suffix' do
         expect(Filesize.from('1 M').to).to eq 1000 * 1000
       end
+
+      it 'parses negative kilobytes' do
+        expect(Filesize.from('-1 kB').to).to eq -1000
+      end
+
+      it 'parses negative megabytes' do
+        expect(Filesize.from('-1 MB').to).to eq -1000 * 1000
+      end
+
+      it 'parses negative megabytes without b suffix' do
+        expect(Filesize.from('-1 M').to).to eq -1000 * 1000
+      end
     end
 
     context 'BINARY units' do
@@ -55,6 +67,18 @@ describe Filesize do
 
       it 'parses mebibytes without b suffix' do
         expect(Filesize.from('1 Mi').to).to eq 1024 * 1024
+      end
+
+      it 'parses negative kilobytes' do
+        expect(Filesize.from('-1 KiB').to).to eq -1024
+      end
+
+      it 'parses negative megabytes' do
+        expect(Filesize.from('-1 MiB').to).to eq -1024 * 1024
+      end
+
+      it 'parses negative mebibytes without b suffix' do
+        expect(Filesize.from('-1 Mi').to).to eq -1024 * 1024
       end
     end
   end
@@ -105,12 +129,24 @@ describe Filesize do
   end
 
   describe '#pretty' do
-    it 'returns the number of the most matching prefix with its unit (BINARY default)' do
-      expect(Filesize.new(1024).pretty).to eq '1.00 KiB'
+    context 'BINARY units (default)' do
+      it 'returns the number of the most matching prefix with its unit' do
+        expect(Filesize.new(1024).pretty).to eq '1.00 KiB'
+      end
+
+      it 'returns the negative number of the most matching prefix with its unit' do
+        expect(Filesize.new(-1024).pretty).to eq '-1.00 KiB'
+      end
     end
 
-    it 'returns the number of the most matching prefix with its unit (SI)' do
-      expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+    context 'SI units' do
+      it 'returns the number of the most matching prefix with its unit' do
+        expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+      end
+
+      it 'returns the negative number of the most matching prefix with its unit' do
+        expect(Filesize.new(-1000, Filesize::SI).pretty).to eq '-1.00 kB'
+      end
     end
   end
 
