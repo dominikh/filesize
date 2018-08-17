@@ -129,12 +129,24 @@ describe Filesize do
   end
 
   describe '#pretty' do
-    it 'returns the number of the most matching prefix with its unit (BINARY default)' do
-      expect(Filesize.new(1024).pretty).to eq '1.00 KiB'
+    context 'BINARY units (default)' do
+      it 'returns the number of the most matching prefix with its unit' do
+        expect(Filesize.new(1024).pretty).to eq '1.00 KiB'
+      end
+
+      it 'returns the negative number of the most matching prefix with its unit' do
+        expect(Filesize.new(-1024).pretty).to eq '-1.00 KiB'
+      end
     end
 
-    it 'returns the number of the most matching prefix with its unit (SI)' do
-      expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+    context 'SI units' do
+      it 'returns the number of the most matching prefix with its unit' do
+        expect(Filesize.new(1000, Filesize::SI).pretty).to eq '1.00 kB'
+      end
+
+      it 'returns the negative number of the most matching prefix with its unit' do
+        expect(Filesize.new(-1000, Filesize::SI).pretty).to eq '-1.00 kB'
+      end
     end
   end
 

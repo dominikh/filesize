@@ -71,14 +71,14 @@ class Filesize
   # @return [String]
   # @see #to_s
   def pretty
-    size = @bytes
+    size = @bytes.abs
     if size < @type[:multiplier]
-      unit = "B"
+      unit = 'B'
     else
       pos = (Math.log(size) / Math.log(@type[:multiplier])).floor
       pos = @type[:prefixes].size-1 if pos > @type[:prefixes].size - 1
 
-      unit = @type[:prefixes][pos-1] + "B"
+      unit = @type[:prefixes][pos-1] + 'B'
     end
 
     to_s(unit)
