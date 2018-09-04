@@ -1,3 +1,5 @@
+**This gem is no longer maintained.**
+
 ## filesize
 filesize.rb provides a class for easily working with file sizes.
 That means:

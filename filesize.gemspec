@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = "filesize"
-  s.version = "0.1.1"
+  s.version = "0.2.0"
   s.licenses = ["MIT"]
   s.authors = ["Dominik Honnef"]
   s.description = "filesize is a small class for handling filesizes with both the SI and binary prefixes, allowing conversion from any size to any other size."
